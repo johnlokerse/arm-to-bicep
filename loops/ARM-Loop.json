@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "variables": {
+        "amountOfAccounts": 3,
+        "baseName": "[uniqueString(resourceGroup().id)]"
+    },
+    "resources": [
+        {
+            "name": "[concat(variables('baseName'), 'stg', copyIndex())]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-04-01",
+            "location": "[resourceGroup().location]",
+            "kind": "StorageV2",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "copy": {
+                "name": "myStorageAccountLoop",
+                "count": "[variables('amountOfAccounts')]"
+            }
+        }
+    ]
+}
