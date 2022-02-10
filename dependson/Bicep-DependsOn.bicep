@@ -42,7 +42,7 @@ resource virtualNetwork 'Microsoft.Network/virtualNetworks@2019-11-01' = {
 
 // Nested resources
 resource dnsZone 'Microsoft.Network/dnsZones@2018-05-01' = {
-  name: 'dnzzone.com'
+  name: 'dnszone.com'
   location: resourceGroup().location
 
   resource aRecord 'A@2018-05-01' = {

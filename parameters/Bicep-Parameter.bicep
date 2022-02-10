@@ -1,8 +1,8 @@
 param myString string
 param myInt int
-param myArray bool
-param myBool object
-param myObject array
+param myArray array
+param myBool bool
+param myObject object
 
 @secure()
 param mySecureString string

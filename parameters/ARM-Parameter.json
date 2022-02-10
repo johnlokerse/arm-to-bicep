@@ -1,0 +1,49 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "myString": {
+            "type": "string"
+        },
+        "myInt": {
+            "type": "int"
+        },
+        "myArray": {
+            "type": "array"
+        },
+        "myBool": {
+            "type": "bool"
+        },
+        "myObject": {
+            "type": "object"
+        },
+        "mySecureString": {
+            "type": "securestring"
+        },
+        "myDescription": {
+            "type": "string",
+            "maxLength": 4,
+            "metadata": {
+                "description": "This parameter has a max length of 4."
+            }
+        },
+        "myEvironments": {
+            "type": "string",
+            "allowedValues": [
+                "development",
+                "test"
+            ],
+            "metadata": {
+                "description": "This string can only contain values: development or test."
+            }
+        },
+        "myPrefix": {
+            "type": "string",
+            "defaultValue": "[concat('euw-', uniqueString(resourceGroup().id), '-')]",
+            "metadata": {
+                "description": "This parameter contains a default value"
+            }
+        }
+    },
+    "resources": []
+}

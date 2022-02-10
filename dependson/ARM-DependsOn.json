@@ -1,0 +1,72 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [
+        // Explicit dependency
+        {
+            "name": "contoso.com",
+            "type": "Microsoft.Network/dnsZones",
+            "apiVersion": "2018-05-01",
+            "location": "global",
+            "properties": {}
+        },
+        {
+            "name": "euw-contoso",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2020-11-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.0.0.0/16"
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/dnsZones', 'contoso.com')]"
+            ]
+        },
+        // Nested resources
+        {
+            "name": "dnszone.com",
+            "type": "Microsoft.Network/dnsZones",
+            "apiVersion": "2018-05-01",
+            "location": "global",
+            "properties": {},
+            "resources": [
+                {
+                    "name": "dnszone.com/google",
+                    "type": "Microsoft.Network/dnsZones/A",
+                    "apiVersion": "2018-05-01",
+                    "location": "global",
+                    "properties": {
+                        "TTL": 3600,
+                        "Arecords": []
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/dnsZones', 'dnszone.com')]"
+                    ]
+                },
+                {
+                    "name": "dnszone.com/opensource",
+                    "type": "Microsoft.Network/dnszones/CNAME",
+                    "apiVersion": "2018-05-01",
+                    "location": "global",
+                    "properties": {
+                        "TTL": 3600,
+                        "CNAMERecord": {
+                            "cname": "opensource.microsoft.com"
+                        }
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Network/dnsZones', 'dnszone.com')]"
+                    ]
+                }
+            ]
+        }
+    ],
+    "outputs": {}
+}
