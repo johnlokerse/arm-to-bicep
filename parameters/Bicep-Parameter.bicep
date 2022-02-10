@@ -5,7 +5,7 @@ param myBool object
 param myObject array
 
 @secure()
-param mySecureString
+param mySecureString string
 
 @description('This parameter has a max length of 4.')
 @maxLength(4)
