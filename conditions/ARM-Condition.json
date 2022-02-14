@@ -10,8 +10,6 @@
             "type": "string"
         }
     },
-    "functions": [],
-    "variables": {},
     "resources": [
         {
             "condition": "[not(empty(parameters('virtualNetworkName')))]",
@@ -35,6 +33,5 @@
                 ]
             }
         }
-    ],
-    "outputs": {}
+    ]
 }
