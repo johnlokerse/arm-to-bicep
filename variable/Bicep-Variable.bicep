@@ -11,7 +11,7 @@ var myName = 'John'
 
 var setting = {
   D: {
-    environmentName: 'development'
+    environmentName: 'MyDevEnvironment'
     sku: 'basic'
   }
   T: {

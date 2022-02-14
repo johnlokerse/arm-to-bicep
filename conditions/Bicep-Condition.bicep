@@ -10,7 +10,6 @@ resource myVnet 'Microsoft.Network/virtualNetworks@2019-11-01' = if (!empty(virt
         '10.0.0.0/16'
       ]
     }
-
     subnets: [
       {
         name: !empty(subnetName) ? subnetName : 'myFalseConditionName'

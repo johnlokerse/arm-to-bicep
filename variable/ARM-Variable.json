@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "myEnvironment": {
+            "type": "string",
+            "allowedValues": [
+                "D",
+                "T",
+                "A",
+                "P"
+            ]
+        }
+    },
+    "variables": {
+        "myName": "John",
+        "setting": {
+            "D": {
+                "environmentName": "MyDevEnvironment",
+                "sku": "basic"
+            },
+            "T": {
+                "environmentName": "MyTestEnvironment",
+                "sku": "basic"
+            },
+            "A": {
+                "environmentName": "MyAccEnvironment",
+                "sku": "premium"
+            },
+            "P": {
+                "environmentName": "MyPrdEnvironment",
+                "sku": "premium"
+            },
+        }
+    }
+}
