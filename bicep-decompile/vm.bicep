@@ -1,11 +1,12 @@
 param virtualMachineName string
 param adminUserName string
+param location string
 
 var prefix_var = 'euw-${virtualMachineName}-'
 
 resource abcdefstorage 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   name: toLower('abcdefstorage')
-  location: resourceGroup().location
+  location: location
   sku: {
     name: 'Standard_LRS'
   }
@@ -14,7 +15,7 @@ resource abcdefstorage 'Microsoft.Storage/storageAccounts@2021-04-01' = {
 
 resource prefix_PublicIP 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
   name: '${prefix_var}PublicIP'
-  location: resourceGroup().location
+  location: location
   properties: {
     publicIPAllocationMethod: 'Dynamic'
     dnsSettings: {
@@ -25,7 +26,7 @@ resource prefix_PublicIP 'Microsoft.Network/publicIPAddresses@2020-11-01' = {
 
 resource prefix_nsg 'Microsoft.Network/networkSecurityGroups@2020-11-01' = {
   name: '${prefix_var}nsg'
-  location: resourceGroup().location
+  location: location
   properties: {
     securityRules: [
       {
@@ -48,7 +49,7 @@ resource prefix_nsg 'Microsoft.Network/networkSecurityGroups@2020-11-01' = {
 
 resource prefix_VirtualNetwork 'Microsoft.Network/virtualNetworks@2020-11-01' = {
   name: '${prefix_var}VirtualNetwork'
-  location: resourceGroup().location
+  location: location
   properties: {
     addressSpace: {
       addressPrefixes: [
@@ -71,7 +72,7 @@ resource prefix_VirtualNetwork 'Microsoft.Network/virtualNetworks@2020-11-01' = 
 
 resource prefix_VirtualNetworkInterface 'Microsoft.Network/networkInterfaces@2020-11-01' = {
   name: '${prefix_var}VirtualNetworkInterface'
-  location: resourceGroup().location
+  location: location
   properties: {
     ipConfigurations: [
       {
@@ -95,7 +96,7 @@ resource prefix_VirtualNetworkInterface 'Microsoft.Network/networkInterfaces@202
 
 resource prefix 'Microsoft.Compute/virtualMachines@2021-03-01' = {
   name: prefix_var
-  location: resourceGroup().location
+  location: location
   properties: {
     hardwareProfile: {
       vmSize: 'Standard_A2_v2'
